@@ -1,6 +1,37 @@
- 
+* {
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+}
 
- .PokemonNameWarning{
-     color: red;
-     font-weight: 800;
- }
+.pokeSection {
+
+    .PokemonNameWarning {
+        color: red;
+        font-weight: 800;
+    }
+
+    .table {
+        margin-top: 10px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin-bottom: 10px;
+
+        th,
+        td {
+            padding: 0px 5px 0px 5px;
+            border: 1px solid black;
+        }
+
+        .moves {
+            // position: relative;
+            display: block;
+            max-height: 300px;
+            overflow: hidden;
+        }
+    }
+
+}

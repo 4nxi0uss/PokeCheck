@@ -30,6 +30,21 @@ const initialState: CounterState = {
       {
         name: 'string'
       }
+    ],
+    name: '',
+    held_items: [
+      {
+        item: {
+          name: ''
+        }
+      }
+    ],
+    moves: [
+      {
+        move: {
+          name: ''
+        }
+      }
     ]
   },
   status: 'default',

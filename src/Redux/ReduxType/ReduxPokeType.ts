@@ -4,6 +4,7 @@ export const FAILED = 'FAILED'
 
 export interface pokemonTypes {
 
+
     abilities: [],
     sprites: {
         front_default: string
@@ -11,6 +12,21 @@ export interface pokemonTypes {
     forms: [
         {
             name: string
+        }
+    ]
+    name: string,
+    held_items: [
+        {
+            item: {
+                name: string
+            }
+        }
+    ],
+    moves: [
+        {
+            move: {
+                name: string
+            }
         }
     ]
 

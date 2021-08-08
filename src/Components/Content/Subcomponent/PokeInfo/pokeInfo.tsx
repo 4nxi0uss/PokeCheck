@@ -7,6 +7,7 @@ import { FAILED, SUCCESS } from '../../../../Redux/ReduxType/ReduxPokeType';
 import './PokeInfo.scss'
 
 const PokeInfo = () => {
+
     const [pokemonName, setPokemonName] = useState<string>('')
 
     const dispatch = useAppDispatch();
@@ -17,9 +18,24 @@ const PokeInfo = () => {
 
     const { pokemon, status } = useAppSelector((state) => state.poke);
 
+    console.log(pokemon)
+
     const pokeAbilities = () => {
         return pokemon.abilities?.map((abi: any) => (
             <p key={abi.ability.name}>{abi.ability.name}</p>
+        ));
+    };
+
+    const pokeHeldItems = () => {
+        return pokemon.held_items?.map((heldItem: any) => (
+            <p key={heldItem.item.name}>{heldItem.item.name}</p>
+        ));
+    };
+
+    const pokeMoves = () => {
+        console.log(pokemon.moves.length)
+        return pokemon.moves?.map((move: any) => (
+            <p key={move.move.name}>{move.move.name}</p>
         ));
     };
 
@@ -41,7 +57,7 @@ const PokeInfo = () => {
     }
 
     return (
-        <section>
+        <section className='pokeSection'>
             {status === FAILED ? <p className='PokemonNameWarning'>Pokemon name is wrong</p> : null}
             <label>
                 <input type="text" onChange={handlePokemonName} value={pokemonName} onKeyDown={handleAskByKeyDown} />
@@ -49,9 +65,27 @@ const PokeInfo = () => {
             </label>
             {/* <p>{status}</p> */}
             <br />
-            {status === SUCCESS && <img className='pokeImg' src={pokemon?.sprites?.front_default} alt={pokemon?.forms[0]?.name} />}
+            {status === SUCCESS && <img className='pokeImg' src={pokemon?.sprites?.front_default} alt={pokemon?.name} />}
             <br />
-            {status === SUCCESS ? pokeAbilities() : null}
+            {/* {status === SUCCESS ? pokeAbilities() : null} */}
+            <table className='table'>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Abilities</th>
+                        <th>Held Items</th>
+                        <th>Moves</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{pokemon?.name}</td>
+                        <td>{pokeAbilities()}</td>
+                        <td> {pokeHeldItems()}</td>
+                        <td className='moves'>{pokeMoves()}</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
     )
 }
