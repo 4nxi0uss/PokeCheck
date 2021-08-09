@@ -33,7 +33,6 @@ const PokeInfo = () => {
     };
 
     const pokeMoves = () => {
-        console.log(pokemon.moves.length)
         return pokemon.moves?.map((move: any) => (
             <p key={move.move.name}>{move.move.name}</p>
         ));
@@ -45,13 +44,13 @@ const PokeInfo = () => {
     }
 
     const handleAskByClick = () => {
-        dispatch(getPokemon(pokemonName.toLowerCase()));
+        dispatch(getPokemon(pokemonName.toLowerCase().trim()));
         setPokemonName('')
     }
 
     const handleAskByKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.keyCode === 13) {
-            dispatch(getPokemon(pokemonName.toLowerCase()));
+            dispatch(getPokemon(pokemonName.toLowerCase().trim()));
             setPokemonName('')
         }
     }
@@ -61,7 +60,7 @@ const PokeInfo = () => {
             {status === FAILED ? <p className='PokemonNameWarning'>Pokemon name is wrong</p> : null}
             <label>
                 <input type="text" onChange={handlePokemonName} value={pokemonName} onKeyDown={handleAskByKeyDown} />
-                <button onClick={handleAskByClick} >Ask</button>
+                <button onClick={handleAskByClick}>Ask</button>
             </label>
             {/* <p>{status}</p> */}
             <br />
@@ -75,6 +74,12 @@ const PokeInfo = () => {
                         <th>Abilities</th>
                         <th>Held Items</th>
                         <th>Moves</th>
+                        <th>hp</th>
+                        <th>Attack</th>
+                        <th>defense</th>
+                        <th>special-attack</th>
+                        <th>special-defense</th>
+                        <th>speed</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,7 +87,13 @@ const PokeInfo = () => {
                         <td>{pokemon?.name}</td>
                         <td>{pokeAbilities()}</td>
                         <td> {pokeHeldItems()}</td>
-                        <td className='moves'>{pokeMoves()}</td>
+                        <td className='moves'><p className="numberOfMoves">Number of moves {pokemon.moves.length}</p>  {pokeMoves()}</td>
+                        <td>{pokemon?.stats[0].base_stat}</td>
+                        <td>{pokemon?.stats[1].base_stat}</td>
+                        <td>{pokemon?.stats[2].base_stat}</td>
+                        <td>{pokemon?.stats[3].base_stat}</td>
+                        <td>{pokemon?.stats[4].base_stat}</td>
+                        <td>{pokemon?.stats[5].base_stat}</td>
                     </tr>
                 </tbody>
             </table>

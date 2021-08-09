@@ -45,8 +45,48 @@ const initialState: CounterState = {
           name: ''
         }
       }
-    ]
+    ],
+    stats: [
+      {
+        base_stat: 1,
+        stat: {
+          name: ''
+        }
+      },
+      {
+        base_stat: 1,
+        stat: {
+          name: ''
+        }
+      },
+      {
+        base_stat: 1,
+        stat: {
+          name: ''
+        }
+      },
+      {
+        base_stat: 1,
+        stat: {
+          name: ''
+        }
+      },
+      {
+        base_stat: 1,
+        stat: {
+          name: ''
+        }
+      },
+      {
+        base_stat: 1,
+        stat: {
+          name: ''
+        }
+      },
+    ],
+
   },
+
   status: 'default',
 }
 
