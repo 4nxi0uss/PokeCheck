@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, /*PayloadAction*/ } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { FAILED, LOADING, pokemonTypes, SUCCESS } from '../ReduxType/ReduxPokeType'
 
@@ -8,10 +8,6 @@ export const getPokemon = createAsyncThunk('pokemon/getPokemon', async (pokemonN
   const data = await fetch(`${process.env.REACT_APP_API_URL}${pokemonName}`)
   return data.json()
 })
-
-// export const getPokemon = createAsyncThunk('pokemon/getPokemon', async () => {
-//   return await fetch(`https://pokeapi.co/api/v2/pokemon/pikachu`).then((res) => res.json())
-// })
 
 // Define a type for the slice state
 interface CounterState {
@@ -109,22 +105,8 @@ export const counterSlice = createSlice({
       state.status = FAILED
     })
   }
-  // extraReducers: {
-  //   [`getPokemon.pending`]: (state) => {
-  //     state.status = 'loading'
-  //   },
-  //   [`getPokemon.fulfilled`]: (state, action) => {
-  //     state.pokemon = action.payload
-  //     state.status = 'success'
-  //   },
-  //   [`getPokemon.rejected`]: (state) => {
-  //     state.status = 'failed'
-  //   },
-  // }
 }
 )
-
-// export const { increment, decrement, incrementByAmount } = counterSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.poke.pokemon

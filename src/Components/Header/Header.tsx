@@ -1,10 +1,9 @@
-import * as React from 'react';
 import './Header.scss'
 
-const Header = ()=>{
-    return(
+const Header = () => {
+    return (
         <header className='header'>
-            <p className='ask'>Ask about Pokemon</p>
+            <h1 className='ask'>Ask about Pokemon</h1>
         </header>
     )
 }

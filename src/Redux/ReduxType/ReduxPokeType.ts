@@ -2,6 +2,7 @@ export const LOADING = 'LOADING'
 export const SUCCESS = 'SUCCESS'
 export const FAILED = 'FAILED'
 
+// Define a type 
 export interface pokemonStats {
     base_stat: number,
     stat: {
@@ -9,7 +10,7 @@ export interface pokemonStats {
     }
 }
 
-
+// Define a type 
 export interface pokemonTypes {
     abilities: [],
     sprites: {

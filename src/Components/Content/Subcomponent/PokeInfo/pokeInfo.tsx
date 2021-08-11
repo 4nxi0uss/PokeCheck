@@ -19,18 +19,21 @@ const PokeInfo = () => {
 
     const { pokemon, status } = useAppSelector((state) => state.poke);
 
+    // show abilities of pokemon from API
     const pokeAbilities = () => {
         return pokemon.abilities?.map((abi: any) => (
             <p key={abi.ability.name}>{abi.ability.name}</p>
         ));
     };
 
+    // show Helded items of pokemon from API
     const pokeHeldItems = () => {
         return pokemon.held_items?.map((heldItem: any) => (
             <p key={heldItem.item.name}>{heldItem.item.name}</p>
         ));
     };
 
+    // show Moves of pokemon from API
     const pokeMoves = () => {
         return pokemon.moves?.map((move: any, index: number) => {
             if (Number(index) < 10 && !showMoreMoves) {
@@ -42,18 +45,19 @@ const PokeInfo = () => {
         });
     };
 
+    // handle name from input 
     const handlePokemonName = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPokemonName(e.target.value)
 
     }
 
     const handleAskByClick = () => {
-        dispatch(getPokemon(pokemonName.toLowerCase().trim()));
+        pokemonName.trim().length !== 0 && dispatch(getPokemon(pokemonName?.toLowerCase().trim()));
         setPokemonName('')
     }
 
     const handleAskByKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 && pokemonName.trim().length !== 0) {
             dispatch(getPokemon(pokemonName.toLowerCase().trim()));
             setPokemonName('')
         }
@@ -63,8 +67,10 @@ const PokeInfo = () => {
         setShowMoreMoves(!showMoreMoves)
     }
 
+    //add loading element 
     const loadingScrean = <div className='loadingScrean'> </div>
 
+    //add failed loding element 
     const failedLoding = <div className='filedLoading'>Sorry but we don't found this pokemon, please try  search  another one.</div>
 
     return (
@@ -72,33 +78,26 @@ const PokeInfo = () => {
             {status === FAILED
                 ? <p className='PokemonNameWarning'>Pokemon name is wrong</p>
                 : null}
-            {/* <label className='searchPokemonLable'> Find Pokemon: */}
             <input className='searchPokemon' placeholder='Find Pokemon...' type="text" onChange={handlePokemonName} value={pokemonName} onKeyDown={handleAskByKeyDown} />
-            <button onClick={handleAskByClick}>Ask</button>
-            {/* </label> */}
-            {/* <p>{status}</p> */}
+            <button className="btnAsk" onClick={handleAskByClick}>Ask</button>
             <br />
             {Boolean(status === LOADING)
                 ? loadingScrean
                 : Boolean(status !== FAILED)
-                    ? Boolean(status === SUCCESS) && <><img className='pokeImg' src={pokemon?.sprites?.front_default} alt={pokemon?.name} />
-
+                    ? Boolean(status === SUCCESS)
+                    && <><img className='pokeImg' src={pokemon?.sprites?.front_default} alt={pokemon?.name} />
                         <table className='table'>
                             <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Abilities</th>
                                     <th>Held Items</th>
-                                    <th>Moves
-                                        <th className="numberOfMoves">
-                                            Number of moves {pokemon.moves.length}
-                                        </th>
-                                    </th>
+                                    <th>Moves</th>
                                     <th>hp</th>
                                     <th>Attack</th>
                                     <th>defense</th>
-                                    <th>special-attack</th>
-                                    <th>special-defense</th>
+                                    <th>special attack</th>
+                                    <th>special defense</th>
                                     <th>speed</th>
                                 </tr>
                             </thead>
@@ -107,7 +106,7 @@ const PokeInfo = () => {
                                     <td>{pokemon?.name}</td>
                                     <td>{pokeAbilities()}</td>
                                     <td> {pokeHeldItems()}</td>
-                                    <td className='moves'>{/*<p className="numberOfMoves">Number of moves {pokemon.moves.length}</p>*/} {pokeMoves()}
+                                    <td className='moves'><p className="numberOfMoves">Number of moves {pokemon.moves.length}</p> {pokeMoves()}
                                         {Number(pokemon.moves.length) > 10
                                             ? <button className='btnShowMore' onClick={handleShowMore}>
                                                 {!showMoreMoves
