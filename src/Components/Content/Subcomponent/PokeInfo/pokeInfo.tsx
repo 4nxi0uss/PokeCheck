@@ -21,21 +21,25 @@ const PokeInfo = () => {
 
     // show abilities of pokemon from API
     const pokeAbilities = () => {
-        return pokemon.abilities?.map((abi: any) => (
+        return pokemon.abilities?.map((abi: { ability: { name: string; }; }) => (
             <p key={abi.ability.name}>{abi.ability.name}</p>
         ));
     };
 
     // show Helded items of pokemon from API
     const pokeHeldItems = () => {
-        return pokemon.held_items?.map((heldItem: any) => (
+        return pokemon.held_items?.map((heldItem: {
+            item: {
+                name: string;
+            };
+        }) => (
             <p key={heldItem.item.name}>{heldItem.item.name}</p>
         ));
     };
 
     // show Moves of pokemon from API
     const pokeMoves = () => {
-        return pokemon.moves?.map((move: any, index: number) => {
+        return pokemon.moves?.map((move, index: number) => {
             if (Number(index) < 10 && !showMoreMoves) {
                 return <p key={move.move.name}>{move.move.name}</p>
             } else if (Number(index) > 10 && showMoreMoves) {
