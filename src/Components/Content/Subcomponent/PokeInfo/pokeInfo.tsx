@@ -75,7 +75,7 @@ const PokeInfo = () => {
     const loadingScrean = <div className='loadingScrean'> </div>
 
     //add failed loding element 
-    const failedLoding = <div className='filedLoading'>Sorry but we don't found this pokemon, please try  search  another one.</div>
+    const failedLoding = <div className='filedLoading'>This Pokémon does not exist, try to find another one.</div>
 
     return (
         <section className='pokeSection'>
